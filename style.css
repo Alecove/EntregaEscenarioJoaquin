@@ -1,0 +1,79 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #05050a; /* Oscuro total de cine */
+    margin: 0;
+}
+
+.contenedor-teatro {
+    width: 90%;
+    max-width: 900px;
+    background: #111;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+    overflow: hidden;
+}
+
+/* --- ESTILOS DE LAS BUTACAS --- */
+.butaca {
+    cursor: pointer;
+}
+
+/* Detalles del asiento: reposabrazos oscuros */
+.reposabrazos {
+    fill: #2c3e50;
+}
+
+/* Estado normal de las butacas */
+.respaldo {
+    fill: #922b21; 
+    transition: fill 0.3s;
+}
+
+.asiento {
+    fill: #c0392b; /* Rojo base */
+    transform-origin: center;
+    transform-box: fill-box; 
+    transition: fill 0.2s;
+}
+
+/* Efecto hover: se iluminan un poco al pasar el ratón */
+.butaca:hover .asiento { fill: #e74c3c; }
+.butaca:hover .respaldo { fill: #cd6155; }
+
+/* --- 1.2: ANIMACIÓN AL SELECCIONAR (EL REQUISITO) --- */
+
+/* Aplicamos la animación al cojín del asiento */
+.butaca.seleccionada .asiento {
+    animation: seleccionarAsiento 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Cambiamos el color estático del respaldo para acompañar */
+.butaca.seleccionada .respaldo {
+    fill: #27ae60;
+}
+
+/* KEYFRAMES: 
+   1. Cambia de Color (fill)
+   2. Cambia de Tamaño (transform: scale)
+   3. Cambia de Forma (rx: de bordes cuadrados a muy redondos)
+*/
+@keyframes seleccionarAsiento {
+    0% {
+        transform: scale(1);
+        fill: #c0392b; /* Rojo */
+        rx: 4px; /* Forma original (borde ligeramente curvo) */
+    }
+    50% {
+        transform: scale(1.4) translateY(-3px); /* Crece un 40% (TAMAÑO) */
+        fill: #f39c12; /* Naranja/Amarillo (COLOR) */
+        rx: 15px; /* Se vuelve casi un círculo (FORMA) */
+    }
+    100% {
+        transform: scale(1.15) translateY(-1px); /* Se queda un 15% más grande */
+        fill: #2ecc71; /* Verde (COLOR FINAL) */
+        rx: 8px; /* Forma final intermedia */
+    }
+}
